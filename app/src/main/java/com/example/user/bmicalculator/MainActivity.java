@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private Button calculate;
-    private TextView weight,height;
+    private TextView mweight,mheight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,23 +17,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         calculate = (Button)findViewById(R.id.button_cal);
-        weight = (TextView)findViewById(R.id.editTextWeight);
-        height = (TextView)findViewById(R.id.editTextHeight);
+        mweight = (TextView)findViewById(R.id.editTextWeight);
+        mheight = (TextView)findViewById(R.id.editTextHeight);
 
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String heightC = height.getText().toString();
-                String weightC = weight.getText().toString();
+                String heightC = mheight.getText().toString();
+                String weightC = mweight.getText().toString();
 
                 Double height = Double.valueOf(heightC);
                 Double weight = Double.valueOf(weightC);
 
-                double bmi = weight / ((height/100) * (height/100));
-                String resultBmi = String.format("%.2f",bmi);
-
+                Double bmi = weight / ((height/100) * (height/100));
                 String getBmiText = getBmiState(bmi);
+                String resultBmi = String.format("ค่า BMI ที่ได้คือ %.1f\n\nอยู่ในเกณฑ์ : %s", bmi,getBmiText);
 
                 Intent intent = new Intent(MainActivity.this, MainResultBmi.class);
 
